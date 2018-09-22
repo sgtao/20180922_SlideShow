@@ -1,15 +1,43 @@
 ﻿@charset 'utf-8'
 
 .container {
-	width: 300px
+	width: 300px;
 	margine: 0 auto;
 }
 
-.mySlides {display: none;}
+.mySlides {
+	display: none;
+	width: 150px;
+}
 
 .active {
     background-color: #717171;
 }
+
+/* The button */
+#start {
+  float: left;
+}
+
+#stop {
+  float: right;
+}
+
+#start, #stop {
+  cursor: pointer;
+  font-size: 18px;
+  width: 145px;
+  background: #eee;
+  height: 40px;
+  line-height: 40px;
+  box-shadow: 0 6px 0 #ccc ;
+}
+
+#start.pushed, #stop.pushed {
+  margin-top: 3px;
+  box-shadow: 0 3px 0 #ccc;
+}
+
 
 /* The dots/bullets/indicators */
 .dot {
