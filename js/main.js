@@ -10,7 +10,10 @@ showInitSlide();
 function showInitSlide() {
     var i;
     var slides = document.getElementsByClassName("mySlides");
-    for (i = 0; i < slides.length; i++) {
+ 	if (slides.length <= 0) {
+		return;
+	}
+   for (i = 0; i < slides.length; i++) {
 		slides[i].style.display = "none";
     }
     slides[0].style.display = "block";
@@ -22,21 +25,30 @@ function showSlides() {
       return;
     }
     var i;
+    var interval = 3000; // default interval 3sec.
+	var slide;
     var slides = document.getElementsByClassName("mySlides");
+
     for (i = 0; i < slides.length; i++) {
-	slides[i].style.display = "none";
+		slides[i].style.display = "none";
     }
 
-    slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}
-    slides[slideIndex-1].style.display = "block";
+	slide = slides[slideIndex];
+    slide.style.display = "block";
 
-    setTimeout(showSlides, 2000); // Change image every 2 seconds
+    // set interval of this slide
+	if (slide.id == "content") { interval = 4000; }
+	else { interval = 3000;	} 
+
+    slideIndex++;
+    if (slideIndex >= slides.length) {slideIndex = 0; isStarted = false; }
+
+    setTimeout(showSlides, interval); // Change image along above interval
 }
 
 start.addEventListener('click', function(){
     if (isStarted === true) {
-      return;
+		return;
     }
     isStarted = true;
     this.className = 'pushed';
@@ -46,7 +58,7 @@ start.addEventListener('click', function(){
 
 stop.addEventListener('click', function(){
     if (isStarted === false) {
-      return;
+		return;
     }
     isStarted = false;
     start.className = '';
