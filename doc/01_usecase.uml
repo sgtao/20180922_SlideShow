@@ -1,0 +1,39 @@
+@startuml
+
+Title
+Usecase of Slideshow system
+end Title
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor User
+File  Content_File
+
+rectangle チャレンジサイト {
+  User -- (コース選択)
+  (スライド生成) -- Content_File : 配信
+  User -- (質問・チェック)
+  User -- (実績確認)
+  (スライド生成) <. (コース選択)
+  (質問・チェック) <. (スライド生成)
+  (実績確認) <. (質問・チェック)
+}
+
+database Content_DB
+Content_DB -> Content_File : 登録
+
+actor Collaborators
+
+rectangle コンテンツ {
+  Collaborators -- (質問・回答例提供)
+  Collaborators -- (Like or not アンケート)
+  (Like or not アンケート) <. (質問・回答例提供)
+  (コンテンツ採用) <. (Like or not アンケート)
+  (コンテンツ採用) -- Content_DB : 追加
+}
+
+
+
+
+@enduml
