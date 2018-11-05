@@ -1,0 +1,15 @@
+#start {
+  background: #eee;
+  padding: 5px;
+  display: inline-block;
+}
+
+#start:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.wrapper{
+  width: 90%;
+  height: 90%;
+}
