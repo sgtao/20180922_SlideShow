@@ -1,7 +1,10 @@
 #start {
   background: #eee;
   padding: 5px;
+  width: 70px;
+  height: 40px;
   display: inline-block;
+  font-size:20pt
 }
 
 #start:hover {
@@ -10,6 +13,6 @@
 }
 
 .wrapper{
-  width: 90%;
-  height: 90%;
+  width: 600px;
+  height: 400px;
 }
