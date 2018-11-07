@@ -52,7 +52,7 @@ window.onload = function() {
 // setting of slideshow
 var isStarted = false, isFinished = false;
 var contentIndex = 0, textIndex = 0;
-var interval = 3000; // default interval 3sec.
+var interval = 300; // default interval 3sec.
 var context = {question:"hoge", check:"foo", example:"bar"};
 var content_struct = { number : "Qx", context: context };
 var content_number = "";
@@ -66,6 +66,7 @@ $(function(){
       if (isStarted === true) {
         return;
       }
+      this.className = 'pushed';
       let data = "";
       let xhr = $.ajax({
         type: 'GET',
@@ -84,6 +85,13 @@ $(function(){
       isStarted = true;
       isFinished = false;
       startSlideshow(load_contents);
+    });
+
+    $('#reload').click(function(){
+    });
+
+    $('#close').click(function(){
+      window.close();
     });
 });
 
@@ -207,7 +215,11 @@ function startContents(load_contents){
 function showContents(type_array, text_array){
   console.log('showContents( contentIndex : '+contentIndex+'): textIndex ' + textIndex);
   if (isStarted === false) {
-    if (isFinished === true) {showSlideArea("endslide");}
+    if (isFinished === true) {
+      console.log('slide finished!');
+      $('#start').className = 'released'; // it dosen't active.
+      showSlideArea("endslide");
+    }
     return;
   }
   content_number = number_array[contentIndex];

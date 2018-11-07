@@ -1,15 +1,52 @@
-#start {
+.container {
+  font-family: 'Courier New', sans-serif;
+  width: 600px;
+  height: 500px;
+  margin: 30px auto 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+.buttons {
   background: #eee;
   padding: 5px;
   width: 70px;
   height: 40px;
+  margin: 40px auto 0;
   display: inline-block;
-  font-size:20pt
+  font-size:20pt;
 }
 
-#start:hover {
-  opacity: 0.7;
+#start, #close {
   cursor: pointer;
+  font-size: 18px;
+  width: 145px;
+  height: 40px;
+  background: #eee;
+  line-height: 40px;
+  box-shadow: 0 6px 0 #ccc;
+}
+
+#start {
+  float: left;
+}
+
+#close {
+  float: right;
+}
+
+#start:hover, #close:hover {
+  opacity: 0.3;
+}
+
+#start.released {
+  margin-top: 3px;
+  font-size:20pt;
+}
+#start.pushed {
+  margin-top: 3px;
+  font-size:24pt;
+  box-shadow: 0 3px 0 #ccc;
 }
 
 .wrapper{
