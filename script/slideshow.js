@@ -2,7 +2,7 @@
 
 //jsonファイルURL
 var directory = 'contents';
-var file = 'gobi002.json';
+var file =  document.getElementById( 'slidewindow' ).title;;
 // var url = 'http://' + dmain + '/' + directory + '/' + file + 'json';
 var url = directory + '/' + file;
 var load_contents = new Array();
