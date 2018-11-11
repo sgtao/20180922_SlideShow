@@ -1,6 +1,6 @@
-# 20180922_SlideShow
+# 20181111_Comuchalle_trial
 
-This is a slideshow frame on browser
+Comunication Challenge Traning Trial
 
 ## Sample
 https://sgtao.github.io/20180922_SlideShow/
