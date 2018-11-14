@@ -52,7 +52,7 @@ window.onload = function() {
 // setting of slideshow
 var isStarted = false, isFinished = false;
 var contentIndex = 0, textIndex = 0;
-var interval = 300; // default interval 3sec.
+var interval = 3000; // default interval 3sec.
 var context = {question:"hoge", check:"foo", example:"bar"};
 var content_struct = { number : "Qx", context: context };
 var content_number = "";
