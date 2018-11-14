@@ -3,7 +3,7 @@
 Comunication Challenge Traning Trial
 
 ## Sample
-https://sgtao.github.io/20180922_SlideShow/
+https://sgtao.github.io/20181111_Comuchalle_trial/
 
 
 ## Slide memo
