@@ -1,0 +1,37 @@
+@startuml
+
+Title
+Usecase of Slide Content
+end Title
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor User << Human >>
+actor ComuChalleSite << Application >>
+File Content_JSON
+Database LocalStrage_List
+
+rectangle Portal_Page {
+	User -- (Select Course) : 1st
+	(Select Course) --> ComuChalleSite
+}
+
+rectangle Contents_List_Page {
+	(Show List Page) <- ComuChalleSite : 1st fork
+	User -- (Select Content) : 2nd
+	(Select Content) -> ComuChalleSite
+	User -- (Check finished) : 6th
+    (Check finished) -> LocalStrage_List : checked
+} 
+
+rectangle Slide_Content_Page {
+	(Show Slide Page) <- ComuChalleSite : 2nd fork
+	User -- (Start Content) : 3rd
+	(Start Content) --> Content_JSON : get(request)
+	User -- (Slide Content) : 4th
+	(Slide Content) <-- Content_JSON : content(ack_JSON)
+	User -- (Close Page) : 5th
+}
+
+@enduml
