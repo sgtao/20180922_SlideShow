@@ -52,7 +52,7 @@ window.onload = function() {
 // setting of slideshow
 var isStarted = false, isFinished = false;
 var contentIndex = 0, textIndex = 0;
-var interval = 3000; // default interval 3sec.
+var interval = 300; // default interval 3sec.
 var context = {question:"hoge", check:"foo", example:"bar"};
 var content_struct = { number : "Qx", context: context };
 var content_number = "";
@@ -67,6 +67,8 @@ $(function(){
         return;
       }
       this.className = 'pushed';
+      console.log($('#start').text);
+      $('#start').text('Running');
       let data = "";
       let xhr = $.ajax({
         type: 'GET',
@@ -128,7 +130,7 @@ function showSlideArea(type){
     case "question" :
       showContentNumber(content_number);
       ctx.fillText("質問", 20, 70);
-      ctx.fillStyle = 'blue';
+      ctx.fillStyle = 'darkblue';
       ctx.fillText("回答してください。", ctx_w-240, ctx_h-30);
       ctx.font = bkup_font;
       ctx.fillStyle = bkup_fillStyle;
@@ -216,8 +218,8 @@ function showContents(type_array, text_array){
   console.log('showContents( contentIndex : '+contentIndex+'): textIndex ' + textIndex);
   if (isStarted === false) {
     if (isFinished === true) {
-      console.log('slide finished!');
       $('#start').className = 'released'; // it dosen't active.
+      $('#start').text('finished');
       showSlideArea("endslide");
     }
     return;
