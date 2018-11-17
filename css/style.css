@@ -7,6 +7,16 @@
   font-weight: bold;
 }
 
+.gobi {
+  font-family: 'Courier New', sans-serif;
+  margin: 10px auto 0;
+  width: 400px;
+  text-align: center;
+  font-weight: bold;
+  font-size:20pt;
+  background: #0e0;
+}
+
 .buttons {
   background: #eee;
   padding: 5px;
