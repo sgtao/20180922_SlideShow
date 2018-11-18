@@ -2,9 +2,8 @@
 
 //jsonファイルURL
 var directory = 'contents';
-var file =  document.getElementById( 'slidewindow' ).title;;
-// var url = 'http://' + dmain + '/' + directory + '/' + file + 'json';
-var url = directory + '/' + file;
+var file =  'gobi002.json';
+var json_url = directory + '/' + file;
 var load_contents = new Array();
 
 // setting canvas
@@ -26,11 +25,62 @@ var guideIndex = 0;
 var img_src_array = [];
 var imgs_array = [];
 img_src_array.push('img/gobi_00_title.jpg');
-img_src_array.push('img/gobi_01_howto.jpg');
-img_src_array.push('img/gobi_02_advice.jpg');
-img_src_array.push('img/gobi_03_start.jpg');
 var slide_img = new Image();
 slide_img.src = img_src_array[0];
+
+// setting of slideshow
+var isStarted = false, isFinished = false;
+var contentIndex = 0, textIndex = 0;
+var interval = 3000; // default interval 3sec.
+var context = {question:"hoge", check:"foo", example:"bar"};
+var content_struct = { number : "Qx", context: context };
+var content_number = "";
+var number_array = new Array(); // for content_number
+var type_array = new Array();
+var text_array = new Array();
+
+
+
+// first action at window.load
+window.onload = function() {
+  // get parameter
+  let urlParam = location.search.substring(1);
+  if(urlParam) {
+    // split at &
+    let param = urlParam.split('&');
+    let paramArray = [];
+    for (let i = 0; i < param.length; i++) {
+      let paramItem = param[i].split('=');
+      paramArray[paramItem[0]] = paramItem[1];
+    }
+ 
+    // check id parameter to set JSON file and type of content
+    let filename = new String(paramArray.id + ".json")
+    console.log("filename=" + filename);
+    if (filename.indexOf("gobi") === 0) {
+      // title name
+      var top_title = document.getElementById('title');
+      top_title.textContent = "語尾トレーニング" + filename.substring(4,7);
+      // JSON of content
+      json_url = directory + '/' + filename; // JSON file
+      // slide images
+      img_src_array.length=0;
+      img_src_array.push('img/gobi_00_title.jpg');
+      img_src_array.push('img/gobi_01_howto.jpg');
+      img_src_array.push('img/gobi_02_advice.jpg');
+      img_src_array.push('img/gobi_03_start.jpg');
+    } else {
+      img_src_array.length=0;
+      img_src_array.push('img/000_Hinagata.jpg');
+	
+    }
+    slide_img.src = img_src_array[0];
+  }
+  console.log("json=" + json_url);
+    
+  loadImages(img_src_array, imgs_array).catch(e=>{console.log('err',e)});
+  showSlideArea("initial");
+}
 
 function loadImages(img_src_array, imgs_array){
   return new Promise((resolve, reject) => {
@@ -44,22 +94,6 @@ function loadImages(img_src_array, imgs_array){
   });
 }
 
-window.onload = function() {
-  loadImages(img_src_array, imgs_array).catch(e=>{console.log('err',e)});
-  showSlideArea("initial");
-}
-
-// setting of slideshow
-var isStarted = false, isFinished = false;
-var contentIndex = 0, textIndex = 0;
-var interval = 3000; // default interval 3sec.
-var context = {question:"hoge", check:"foo", example:"bar"};
-var content_struct = { number : "Qx", context: context };
-var content_number = "";
-var number_array = new Array(); // for content_number
-var type_array = new Array();
-var text_array = new Array();
-
 //イベント
 $(function(){
   $('#start').click(function(){
@@ -72,12 +106,12 @@ $(function(){
       let data = "";
       let xhr = $.ajax({
         type: 'GET',
-        url:  url,
+        url:  json_url,
         async: false
       }).done(function(){
-        $('#msg').text('Loading... ' + url).fadeOut(1000);
+        $('#msg').text('Loading... ' + json_url).fadeOut(1000);
       }).fail(function(){
-        $('#msg').text('Cannot find ' + url);
+        $('#msg').text('Cannot find ' + json_url);
         return;
       });
       data = xhr.responseText;

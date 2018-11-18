@@ -5,22 +5,24 @@
   <meta charset="UTF-8">
   <title>json to slide</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
   <div class="container">
+    <h1 id="title"></h1>
     <div class="bottons">
-			<div id="start" class="released">Start</div>
-			<div id="close">Close</div>
-		</div>
-    <div id="slidewindow" class="wrapper" title="gobi002.json">
+      <div id="start" class="released">Start</div>
+      <div id="close">Close</div>
+    </div>
+    <div id="slidewindow" class="wrapper">
       <canvas id="textarea"></canvas>
     </div>
+
     <p id="msg"></p>
   </div>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script  src="script/slideshow.js"></script>
+
 
 </body>
 </html>
