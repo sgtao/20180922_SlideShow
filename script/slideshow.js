@@ -24,14 +24,16 @@ console.dir(ctx);
 var guideIndex = 0;
 var img_src_array = [];
 var imgs_array = [];
-img_src_array.push('img/gobi_00_title.jpg');
+img_src_array.push('img/000_Hinagata.jpg');
 var slide_img = new Image();
 slide_img.src = img_src_array[0];
 
 // setting of slideshow
 var isStarted = false, isFinished = false;
 var contentIndex = 0, textIndex = 0;
-var interval = 3000; // default interval 3sec.
+var base_interval = 3000; //  default interval 3sec(3000 msec).
+var guide_int = base_interval; // interval for guide slides
+var texts_int = base_interval; // interval for content texts
 var context = {question:"hoge", check:"foo", example:"bar"};
 var content_struct = { number : "Qx", context: context };
 var content_number = "";
@@ -72,6 +74,7 @@ window.onload = function() {
 
     }
     slide_img.src = img_src_array[0];
+    showSlideArea("initial");
   }
 
   // load images
@@ -91,7 +94,7 @@ function loadImages(img_src_array, imgs_array){
       imgs_array[i].src = img_src_array[i];
       imgs_array[i].onload = () => resolve(imgs_array[i]);
       imgs_array[i].onerror = (e) => reject(e);
-      console.log('load image : '+ img_src_array[guideIndex]);
+      console.log('load image : '+ img_src_array[i]);
     }
   });
 }
@@ -111,6 +114,8 @@ function loadContentJSON(json_url){
   data = xhr.responseText;
   load_contents = JSON.parse(data);
   console.log('loading contents : ' + load_contents.texts.length);
+  console.log('base interval    : ' + load_contents.base_interval);
+  texts_int = load_contents.base_interval; // unit : msec
   console.dir(load_contents);
 }
 
@@ -202,7 +207,7 @@ function startSlideshow(load_contents){
   showGuideSlide(img_src_array);
 
   // Start slideshow of contents
-  setTimeout(startContents, interval * (img_src_array.length + 1), load_contents);
+  setTimeout(startContents, guide_int * (img_src_array.length + 1), load_contents);
 }
 
 function showGuideSlide(img_src_array) {
@@ -215,7 +220,7 @@ function showGuideSlide(img_src_array) {
 
   // next Slide
   guideIndex++;
-  setTimeout(showGuideSlide, interval, img_src_array);
+  setTimeout(showGuideSlide, guide_int, img_src_array);
 }
 
 
@@ -272,7 +277,7 @@ function showContents(type_array, text_array){
   textIndex++;
   if (textIndex >= text_array.length) { isStarted = false; isFinished = true;}
 
-  setTimeout(showContents, interval, type_array, text_array); // Change text along above interval
+  setTimeout(showContents, texts_int, type_array, text_array); // Change text along above interval
 
 }
 

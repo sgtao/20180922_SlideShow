@@ -1,8 +1,8 @@
-# コミチャレ　トライアル
+# Comuchalled trial
 
 A trail page for Comunication Traning Challeng
 
-## 概要
+## abstruct
 This is a trial mock page to convert Comunication Training more simple.
 
 ## Sample
