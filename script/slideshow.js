@@ -89,13 +89,14 @@ window.onload = function() {
     showSlideArea("initial");
   }
 
-  // load images
-  loadImages(img_src_array, imgs_array).catch(e=>{console.log('err',e)});
-  showSlideArea("initial");
-
   // load JSON file
   console.log("json=" + json_url);
   loadContentJSON(json_url);
+  top_title.textContent = load_contents.title;
+
+  // load images
+  loadImages(img_src_array, imgs_array).catch(e=>{console.log('err',e)});
+  showSlideArea("initial");
 
 }
 
@@ -125,8 +126,9 @@ function loadContentJSON(json_url){
   });
   data = xhr.responseText;
   load_contents = JSON.parse(data);
-  console.log('loading contents : ' + load_contents.texts.length);
+  console.log('content title    : ' + load_contents.title);
   console.log('base interval    : ' + load_contents.base_interval);
+  console.log('loading contents : ' + load_contents.texts.length);
   texts_int = load_contents.base_interval; // unit : msec
   console.dir(load_contents);
 }
@@ -250,12 +252,16 @@ function startContents(load_contents){
   text_array.length = 0;
   for (let i=0; i < load_contents.length; i++ ) {
     number_array.push(load_contents[i].number);
-    type_array.push("genre");
-    text_array.push(load_contents[i].context.genre);
+    if ('genre' in load_contents[i].context) {
+      type_array.push("genre");
+      text_array.push(load_contents[i].context.genre);
+    }
     type_array.push("question");
     text_array.push(load_contents[i].context.question);
-    type_array.push("check");
-    text_array.push(load_contents[i].context.check);
+    if ('check' in load_contents[i].context) {
+      type_array.push("check");
+      text_array.push(load_contents[i].context.check);
+    }
     type_array.push("example");
     text_array.push(load_contents[i].context.example);
   }
