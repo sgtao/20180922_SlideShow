@@ -68,6 +68,18 @@ window.onload = function() {
       img_src_array.push('img/gobi_01_howto.jpg');
       img_src_array.push('img/gobi_02_advice.jpg');
       img_src_array.push('img/gobi_03_start.jpg');
+    } else if (filename.indexOf("iken") === 0) {
+      // title name
+      var top_title = document.getElementById('title');
+      top_title.textContent = "意見＋理由トレーニング" + filename.substring(4,7);
+      json_url = directory + '/' + filename; // JSON file
+      // slide images
+      guide_int = 5000; // set up for iken training.
+      img_src_array.length=0;
+      img_src_array.push('img/iken_00_title.jpg');
+      img_src_array.push('img/iken_01_howto.jpg');
+      img_src_array.push('img/iken_02_advice.jpg');
+      img_src_array.push('img/iken_03_start.jpg');
     } else {
       img_src_array.length=0;
       img_src_array.push('img/000_Hinagata.jpg');
