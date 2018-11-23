@@ -1,11 +1,19 @@
-# 20181111_Comuchalle_trial
+# コミチャレ　トライアル
 
-Comunication Challenge Traning Trial
+A trail page for Comunication Traning Challeng
+
+## 概要
+This is a trial mock page to convert Comunication Training more simple.
 
 ## Sample
 https://sgtao.github.io/20181111_Comuchalle_trial/
 
 
 ## Slide memo
-- MeiryoUI: 36pt Red
-- MeiryoUI: 18pt Black
+Each slide consists of two type of contents.
+### Text contents
+- JSON file under "contents" folder
+### Picture contents
+- JPG file under "img" folder
+  - Big literal   : MeiryoUI 36pt (Red)
+  - Small literal : MeiryoUI: 18pt Black
