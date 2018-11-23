@@ -1,4 +1,7 @@
-[
+{
+  "title": "語尾トレーニング９",
+  "base_interval" : 3000,
+  "texts": [
   {
     "number": "Q.1",
     "context": {
@@ -72,3 +75,4 @@
     }
   }
 ]
+}

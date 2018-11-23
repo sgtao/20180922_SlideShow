@@ -39,8 +39,6 @@ var number_array = new Array(); // for content_number
 var type_array = new Array();
 var text_array = new Array();
 
-
-
 // first action at window.load
 window.onload = function() {
   // get parameter
@@ -53,7 +51,7 @@ window.onload = function() {
       let paramItem = param[i].split('=');
       paramArray[paramItem[0]] = paramItem[1];
     }
- 
+
     // check id parameter to set JSON file and type of content
     let filename = new String(paramArray.id + ".json")
     console.log("filename=" + filename);
@@ -61,7 +59,6 @@ window.onload = function() {
       // title name
       var top_title = document.getElementById('title');
       top_title.textContent = "語尾トレーニング" + filename.substring(4,7);
-      // JSON of content
       json_url = directory + '/' + filename; // JSON file
       // slide images
       img_src_array.length=0;
@@ -72,14 +69,19 @@ window.onload = function() {
     } else {
       img_src_array.length=0;
       img_src_array.push('img/000_Hinagata.jpg');
-	
+
     }
     slide_img.src = img_src_array[0];
   }
-  console.log("json=" + json_url);
-    
+
+  // load images
   loadImages(img_src_array, imgs_array).catch(e=>{console.log('err',e)});
   showSlideArea("initial");
+
+  // load JSON file
+  console.log("json=" + json_url);
+  loadContentJSON(json_url);
+
 }
 
 function loadImages(img_src_array, imgs_array){
@@ -94,6 +96,24 @@ function loadImages(img_src_array, imgs_array){
   });
 }
 
+function loadContentJSON(json_url){
+  let data = "";
+  let xhr = $.ajax({
+    type: 'GET',
+    url:  json_url,
+    async: false
+  }).done(function(){
+    $('#msg').text('Loading... ' + json_url).fadeOut(1000);
+  }).fail(function(){
+    $('#msg').text('Cannot find ' + json_url);
+    return;
+  });
+  data = xhr.responseText;
+  load_contents = JSON.parse(data);
+  console.log('loading contents : ' + load_contents.texts.length);
+  console.dir(load_contents);
+}
+
 //イベント
 $(function(){
   $('#start').click(function(){
@@ -103,24 +123,9 @@ $(function(){
       this.className = 'pushed';
       console.log($('#start').text);
       $('#start').text('Running');
-      let data = "";
-      let xhr = $.ajax({
-        type: 'GET',
-        url:  json_url,
-        async: false
-      }).done(function(){
-        $('#msg').text('Loading... ' + json_url).fadeOut(1000);
-      }).fail(function(){
-        $('#msg').text('Cannot find ' + json_url);
-        return;
-      });
-      data = xhr.responseText;
-      load_contents = JSON.parse(data);
-      console.log('loading contents : ' + load_contents.length);
-      console.dir(load_contents);
       isStarted = true;
       isFinished = false;
-      startSlideshow(load_contents);
+      startSlideshow(load_contents.texts);
     });
 
     $('#reload').click(function(){
