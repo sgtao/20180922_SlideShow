@@ -4,16 +4,20 @@
   <meta charset="utf-8">
   <title>ComuChalle_trial</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-  <div class="container">
+  <div class="menu_container">
     <h1>コミチャレ　トライアル</h1>
-    <p class="gobi"><a href="SlideContent.html?id=gobi002" target="_blank">語尾トレーニング２</a></p>
-    <p class="gobi"><a href="SlideContent.html?id=gobi009" target="_blank">語尾トレーニング９</a></p>
-    </li>
-  </div>
-  <div class="footer">
+    <ul style="list-style:none">
+      <li>↓　実施済にチェックをつけて下さい</li>
+      <li class="gobi"><input type="checkbox" id="gobi002"/><a href="SlideContent.html?id=gobi002" target="_blank">語尾トレーニング２</a></li>
+      <li class="gobi"><input type="checkbox" id="gobi009"/><a href="SlideContent.html?id=gobi009" target="_blank">語尾トレーニング９</a></li>
+</div>
     <p><a href="README.md" target="_blank">README</a></p>
+    <input type="button" value="全クリア" id="clearall" />
+    <p id="msg"></p>
   </div>
+  <script src="script/regist_lists_checked.js"></script>
 </body>
 </html>
