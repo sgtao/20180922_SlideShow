@@ -93,6 +93,12 @@ window.onload = function() {
   console.log("json=" + json_url);
   loadContentJSON(json_url);
   top_title.textContent = load_contents.title;
+  if ('guide_interval' in load_contents) {
+    guide_int = load_contents.guide_interval;
+  } // else guide_int = base_interval;
+  if ('texts_interval' in load_contents) {
+    texts_int = load_contents.texts_interval;
+  } // else texts_int = base_interval;
 
   // load images
   loadImages(img_src_array, imgs_array).catch(e=>{console.log('err',e)});
@@ -127,9 +133,7 @@ function loadContentJSON(json_url){
   data = xhr.responseText;
   load_contents = JSON.parse(data);
   console.log('content title    : ' + load_contents.title);
-  console.log('base interval    : ' + load_contents.base_interval);
   console.log('loading contents : ' + load_contents.texts.length);
-  texts_int = load_contents.base_interval; // unit : msec
   console.dir(load_contents);
 }
 
@@ -214,14 +218,14 @@ function showSlideArea(type){
 }
 
 // start slideshow
-function startSlideshow(load_contents){
+function startSlideshow(texts_array){
 
   // Show Guidance
   guideIndex = 0;
   showGuideSlide(img_src_array);
 
   // Start slideshow of contents
-  setTimeout(startContents, guide_int * (img_src_array.length + 1), load_contents);
+  setTimeout(startContents, guide_int * (img_src_array.length + 1), texts_array);
 }
 
 function showGuideSlide(img_src_array) {
@@ -239,31 +243,31 @@ function showGuideSlide(img_src_array) {
 
 
 
-function startContents(load_contents){
+function startContents(texts_array){
   console.log('startContents');
   // prepare contents array
-  let contents_array = new Array(load_contents.length);
-  for (let n=0; n < load_contents.length; n++ ) {
-    contents_array[n] = load_contents[n];
+  let contents_array = new Array(texts_array.length);
+  for (let n=0; n < texts_array.length; n++ ) {
+    contents_array[n] = texts_array[n];
   }
 
   number_array.length = 0;
   type_array.length = 0;
   text_array.length = 0;
-  for (let i=0; i < load_contents.length; i++ ) {
-    number_array.push(load_contents[i].number);
-    if ('genre' in load_contents[i].context) {
+  for (let i=0; i < texts_array.length; i++ ) {
+    number_array.push(texts_array[i].number);
+    if ('genre' in texts_array[i].context) {
       type_array.push("genre");
-      text_array.push(load_contents[i].context.genre);
+      text_array.push(texts_array[i].context.genre);
     }
     type_array.push("question");
-    text_array.push(load_contents[i].context.question);
-    if ('check' in load_contents[i].context) {
+    text_array.push(texts_array[i].context.question);
+    if ('check' in texts_array[i].context) {
       type_array.push("check");
-      text_array.push(load_contents[i].context.check);
+      text_array.push(texts_array[i].context.check);
     }
     type_array.push("example");
-    text_array.push(load_contents[i].context.example);
+    text_array.push(texts_array[i].context.example);
   }
   console.dir(number_array);
   console.dir(type_array);

@@ -1,6 +1,7 @@
 {
   "title": "語尾トレーニング２",
-  "base_interval" : 3000,
+  "guide_interval": 3000,
+  "texts_interval": 3000,
   "texts": [
     {
       "number": "Q.1",
