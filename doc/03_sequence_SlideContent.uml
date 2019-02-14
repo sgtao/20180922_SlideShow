@@ -1,0 +1,61 @@
+@startuml
+
+Title
+Sequence example at try gobi002 lesson
+end Title
+
+
+actor User << Human >>
+
+box "ComuchalleTrial" #LightBlue
+	collections index.html << PortalPage >>
+	database local_strage << BrowserLocal >>
+end box
+box "SlideContent" #LightGreen
+	collections SlideContent.html << Application >>
+    database images << Contents >>
+    database JSONs << Contents >>
+end box
+
+== Select lesson ==
+
+activate index.html
+
+User -> index.html : Select gobi002
+index.html -> SlideContent.html : jump to page with gobi002
+
+deactivate index.html
+activate  SlideContent.html
+
+== try lesson ==
+
+User -> SlideContent.html : push StartButton
+SlideContent.html <-- images : load PNG files of gobi002
+loop images (title, howto, advice, start)
+	User <-- SlideContent.html : show images of gobi002
+end loop 
+
+SlideContent.html <-- JSONs : load JSON file of gobi002
+note left: convert JSON to object
+loop quetions (Q1,Q2, ... )
+	User <-- SlideContent.html : show genre slide
+	User <-- SlideContent.html : show question slide
+	User <-- SlideContent.html : show check slide
+	User <-- SlideContent.html : show example slide
+end loop 
+User <-- SlideContent.html : show end slide
+
+User -> SlideContent.html : push CloseButton
+index.html <- SlideContent.html : jump to portal by close page
+
+deactivate  SlideContent.html
+activate index.html
+
+== register log of lesson ==
+
+User -> index.html : check gobi002 as finished
+index.html -> local_strage : gobi002 log registered
+activate local_strage
+
+@enduml
+
